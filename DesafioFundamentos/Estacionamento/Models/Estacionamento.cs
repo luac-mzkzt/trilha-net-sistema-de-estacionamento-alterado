@@ -25,17 +25,20 @@ namespace DesafioFundamentos.Models
         {
              if (veiculos.ContainsKey(placaAdicionar))
              {
-                 Console.WriteLine("Esta placa já está cadastrada. Por favor, confira se digitou a placa correta.");
+                 Console.WriteLine("Esta placa já está cadastrada." +
+                 "Por favor, confira se digitou a placa correta.");
              }
             veiculos.Add(placaAdicionar, DateTime.Now);
-            Console.WriteLine($"O veículo {placaAdicionar} foi cadastrado em {veiculos[placaAdicionar]:dd/MM/yy HH:mm}.");
+            Console.WriteLine($"O veículo {placaAdicionar}" +
+            $"foi cadastrado em {veiculos[placaAdicionar]:dd/MM/yy HH:mm}.");
         }
         
         public void RemoverVeiculo(string placa)
         {
            if (!veiculos.TryGetValue(placa, out DateTime horaCadastro))
            {
-                Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. Confira se digitou a placa corretamente");
+                Console.WriteLine("Desculpe, esse veículo não está estacionado aqui." + 
+                "Confira se digitou a placa corretamente");
            }
 
             TimeSpan tempoEstacionado = DateTime.Now - horaCadastro;
