@@ -59,7 +59,7 @@ namespace DesafioFundamentos.Models
 
                 veiculos.Remove(placa);
                 Console.WriteLine($"Veículo {placa} removido em {DateTime.Now:dd/MM/yy HH:mm}.");
-                Console.WriteLine($"Valor total a pagar: R$ {valorTotal}");
+                Console.WriteLine($"Valor total a pagar: {valorTotal:C}");
             }
             else
             {
