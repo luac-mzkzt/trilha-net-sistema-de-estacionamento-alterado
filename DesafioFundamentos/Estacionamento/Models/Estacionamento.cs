@@ -25,48 +25,47 @@ namespace DesafioFundamentos.Models
         {
              if (veiculos.ContainsKey(placaAdicionar))
              {
-                 Console.WriteLine("Esta placa já está cadastrada." +
+                 Console.WriteLine("Esta placa já está cadastrada. " +
                  "Por favor, confira se digitou a placa correta.");
              }
-            veiculos.Add(placaAdicionar, DateTime.Now);
-            Console.WriteLine($"O veículo {placaAdicionar}" +
-            $"foi cadastrado em {veiculos[placaAdicionar]:dd/MM/yy HH:mm}.");
+             else 
+             {
+                veiculos.Add(placaAdicionar, DateTime.Now);
+                Console.WriteLine($"O veículo {placaAdicionar} " +
+                $"foi cadastrado em {veiculos[placaAdicionar]:dd/MM/yy HH:mm}.");
+             }
         }
         
         public void RemoverVeiculo(string placa)
         {
-           if (!veiculos.TryGetValue(placa, out DateTime horaCadastro))
+           DateTime horaCadastro;
+           decimal valorTotal; 
+
+           if (!veiculos.TryGetValue(placa, out horaCadastro))
            {
-                Console.WriteLine("Desculpe, esse veículo não está estacionado aqui." + 
+                Console.WriteLine("Desculpe, esse veículo não está estacionado aqui. " + 
                 "Confira se digitou a placa corretamente");
            }
 
             TimeSpan tempoEstacionado = DateTime.Now - horaCadastro;
-            
-            decimal valorTotal;
 
-            // Verifica se o veículo estacionou menos de meia hora
             if (tempoEstacionado.TotalMinutes <= 30)
             {
                 valorTotal = PrecoInicial;
             }
             else
             {
-                // Calcula o número de horas arredondando para cima
                 int horasEstacionado = (int)Math.Ceiling(tempoEstacionado.TotalHours);
-                
-                // Calcula o valor total considerando o preço por hora
                 valorTotal = PrecoPorHora * horasEstacionado;
             }
 
             veiculos.Remove(placa);
             Console.WriteLine($"Veículo {placa} removido em {DateTime.Now:dd/MM/yy HH:mm}.");
-            Console.WriteLine($"Valor total a pagar: {valorTotal:C}");
+            Console.WriteLine($"Valor total a pagar: {valorTotal}");
         }
 
         public void ListarVeiculos()
         {
-            // Verifica se há veículos estacionados e lista os resultados encontrados no dicionário
             if (veiculos.Any())
             {
                 Console.WriteLine("Os veículos estacionados são:");
